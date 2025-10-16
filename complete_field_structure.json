@@ -1,0 +1,71 @@
+{
+  "marketing_levels": {
+    "1_КАНАЛ_ТРАФИКА": {
+      "поле": "SOURCE_ID",
+      "тип": "список (стандартное поле Битрикс24)",
+      "назначение": "Общая категория источника",
+      "примеры": ["ADVERTISING", "WEB", "PARTNER", "RECOMMENDATION", "EMAIL", "CALL", "OTHER"]
+    },
+    "2_ТИП_ТРАФИКА_КАНАЛ_ПРИВЛЕЧЕНИЯ": {
+      "поле": "UF_CRM_UTM_MEDIUM",
+      "тип": "список",
+      "назначение": "Тип канала привлечения - КАК именно привлекли",
+      "значения": ["cpc", "organic", "referral", "social", "email", "direct", "offline", "other"],
+      "расшифровка": {
+        "cpc": "Платная реклама в поисковиках и соцсетях",
+        "organic": "Органические результаты поиска",
+        "referral": "Переходы с партнерских сайтов, каталогов",
+        "social": "Органические посты в соцсетях, не реклама",
+        "email": "Email-маркетинг, рассылки",
+        "direct": "Прямой ввод URL, закладки",
+        "offline": "QR-коды, баннеры, радио, ТВ с переходом на сайт",
+        "other": "Не удалось определить или специфические каналы"
+      }
+    },
+    "3_ИСТОЧНИК_ТРАФИКА": {
+      "поле": "UF_CRM_UTM_SOURCE",
+      "тип": "строка",
+      "назначение": "Конкретный источник - ОТКУДА именно",
+      "примеры": ["google_ads", "instagram_oleynik", "napopravku", "email_newsletter"]
+    },
+    "4_СПОСОБ_ОБРАЩЕНИЯ": {
+      "поле": "UF_CONTACT_METHOD",
+      "тип": "список",
+      "назначение": "КАК клиент связался с компанией",
+      "примеры": ["Call 8800", "WA 1182", "Instagram Direct", "Форма сайта"]
+    }
+  },
+  "implementation_fields": {
+    "Стандартное поле": {
+      "SOURCE_ID": {
+        "действие": "Используем как есть",
+        "значения": ["ADVERTISING", "WEB", "PARTNER", "RECOMMENDATION", "EMAIL", "CALL", "OTHER"]
+      }
+    },
+    "Новые пользовательские поля": {
+      "UF_CRM_UTM_MEDIUM": {
+        "тип": "список",
+        "значения": ["cpc", "organic", "referral", "social", "email", "direct", "offline", "other"],
+        "обязательность": "Важное поле для аналитики!"
+      },
+      "UF_CRM_UTM_SOURCE": {"тип": "строка", "примеры": "google_ads, instagram_oleynik, napopravku"},
+      "UF_CONTACT_METHOD": {"тип": "список", "важность": "КЛЮЧЕВОЕ ПОЛЕ", "примеры": "Call 8800, WA 1182, Форма сайта"},
+      "UF_CRM_UTM_CAMPAIGN": {"тип": "строка"},
+      "UF_CRM_UTM_CONTENT": {"тип": "строка"},
+      "UF_CRM_UTM_TERM": {"тип": "строка"},
+      "UF_CLIENT_TYPE": {"тип": "список", "значения": ["Новый", "Повторный", "Реактивированный"]},
+      "UF_LANDING_DOMAIN": {"тип": "строка"}
+    }
+  },
+  "example_scenarios": [
+    {"описание":"Google Ads → сайт → форма","SOURCE_ID":"ADVERTISING","UF_CRM_UTM_MEDIUM":"cpc","UF_CRM_UTM_SOURCE":"google_ads","UF_CONTACT_METHOD":"Форма сайта","логика":"Платная реклама → платный канал → Google → форма"},
+    {"описание":"Органический поиск Яндекс → сайт → звонок","SOURCE_ID":"WEB","UF_CRM_UTM_MEDIUM":"organic","UF_CRM_UTM_SOURCE":"yandex_organic","UF_CONTACT_METHOD":"Call 8800","логика":"Веб → органика → Яндекс → звонок"},
+    {"описание":"НаПоправку → сайт → WhatsApp","SOURCE_ID":"PARTNER","UF_CRM_UTM_MEDIUM":"referral","UF_CRM_UTM_SOURCE":"napopravku","UF_CONTACT_METHOD":"WA 1182","логика":"Партнер → реферал → НаПоправку → WhatsApp"},
+    {"описание":"Instagram органический пост → Direct","SOURCE_ID":"OTHER","UF_CRM_UTM_MEDIUM":"social","UF_CRM_UTM_SOURCE":"instagram_oleynik","UF_CONTACT_METHOD":"Instagram @doctor.oleynik","логика":"Соцсети → социальный органика → Instagram → Direct"},
+    {"описание":"Instagram реклама → сайт → форма","SOURCE_ID":"ADVERTISING","UF_CRM_UTM_MEDIUM":"cpc","UF_CRM_UTM_SOURCE":"instagram_ads","UF_CONTACT_METHOD":"Форма сайта","логика":"Реклама → платный → Instagram реклама → форма"},
+    {"описание":"Email-рассылка → сайт → звонок","SOURCE_ID":"EMAIL","UF_CRM_UTM_MEDIUM":"email","UF_CRM_UTM_SOURCE":"newsletter_october","UF_CONTACT_METHOD":"Call 8800","логика":"Email → email-канал → рассылка → звонок"},
+    {"описание":"QR-код с баннера → сайт → форма","SOURCE_ID":"ADVERTISING","UF_CRM_UTM_MEDIUM":"offline","UF_CRM_UTM_SOURCE":"banner_tverskaya","UF_CONTACT_METHOD":"Форма сайта","логика":"Реклама → офлайн → баннер → форма"},
+    {"описание":"Прямой заход на сайт → форма","SOURCE_ID":"WEB","UF_CRM_UTM_MEDIUM":"direct","UF_CRM_UTM_SOURCE":"direct_site","UF_CONTACT_METHOD":"Форма сайта","логика":"Веб → прямой → сайт → форма"},
+    {"описание":"WhatsApp без веб-контекста (прямо написал)","SOURCE_ID":"","UF_CRM_UTM_MEDIUM":"","UF_CRM_UTM_SOURCE":"","UF_CONTACT_METHOD":"WA 1182","логика":"Неизвестно откуда → написал в WhatsApp"}
+  ]
+}

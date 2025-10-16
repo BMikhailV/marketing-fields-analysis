@@ -1,0 +1,10 @@
+Сценарий,SOURCE_ID,UTM_MEDIUM,UTM_SOURCE,CONTACT_METHOD,Логика
+"Google Ads → сайт → форма",ADVERTISING,cpc,google_ads,Форма сайта,"Платная реклама → платный канал → Google → форма"
+"Органический поиск Яндекс → сайт → звонок",WEB,organic,yandex_organic,Call 8800,"Веб → органика → Яндекс → звонок"
+"НаПоправку → сайт → WhatsApp",PARTNER,referral,napopravku,WA 1182,"Партнер → реферал → НаПоправку → WhatsApp"
+"Instagram органический пост → Direct",OTHER,social,instagram_oleynik,Instagram @doctor.oleynik,"Соцсети → социальный органика → Instagram → Direct"
+"Instagram реклама → сайт → форма",ADVERTISING,cpc,instagram_ads,Форма сайта,"Реклама → платный → Instagram реклама → форма"
+"Email-рассылка → сайт → звонок",EMAIL,email,newsletter_october,Call 8800,"Email → email-канал → рассылка → звонок"
+"QR-код с баннера → сайт → форма",ADVERTISING,offline,banner_tverskaya,Форма сайта,"Реклама → офлайн → баннер → форма"
+"Прямой заход на сайт → форма",WEB,direct,direct_site,Форма сайта,"Веб → прямой → сайт → форма"
+"WhatsApp без веб-контекста (прямо написал)",,, ,WA 1182,"Неизвестно откуда → написал в WhatsApp"

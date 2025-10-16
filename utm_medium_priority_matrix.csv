@@ -1,0 +1,10 @@
+Приоритет,Условие,UTM_MEDIUM,UTM_SOURCE,SOURCE_ID
+1,gclid присутствует,cpc,google_ads,ADVERTISING
+2,yclid присутствует,cpc,yandex_ads,ADVERTISING
+3,utm_medium из URL,из URL,из URL,по UTM_MEDIUM
+4,referrer = поисковик,organic,автоопределение,WEB
+5,referrer = каталог,referral,домен referrer,PARTNER
+6,ChatApp канал,social,по каналу,OTHER
+7,Звонок без UTM,,,CALL
+8,Пустой referrer,direct,direct_site,WEB
+9,Не определилось,other,unknown,OTHER

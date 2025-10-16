@@ -1,0 +1,48 @@
+{
+  "utm_medium_logic": {
+    "Автоматическое определение UTM_MEDIUM": {
+      "cpc": {
+        "условия": ["utm_medium=cpc в URL", "Присутствует gclid (Google Ads)", "Присутствует yclid (Яндекс.Директ)", "Присутствует fbclid (Facebook Ads)", "utm_source содержит: google_ads, yandex_ads, vk_ads, facebook_ads"],
+        "UIS_звонки": "Если в UIS настроена привязка номера к рекламной кампании"
+      },
+      "organic": {"условия": ["utm_medium=organic в URL", "Referrer: google.com, yandex.ru, bing.com (без UTM)", "Пустой utm_medium + поисковый referrer"]},
+      "referral": {"условия": ["utm_medium=referral в URL", "Referrer с доменов: napopravku.ru, prodoctorov.ru, sberhealth.ru, 2gis.ru, doctu.ru", "Партнерские ссылки"]},
+      "social": {"условия": ["utm_medium=social в URL", "Referrer: instagram.com, vk.com, facebook.com, telegram", "ChatApp: Instagram Direct, VK Direct, Telegram (без рекламы)"]},
+      "email": {"условия": ["utm_medium=email в URL", "utm_source содержит: newsletter, email, mailchimp"]},
+      "direct": {"условия": ["Пустой referrer", "Прямой ввод URL", "Закладки браузера"]},
+      "offline": {"условия": ["utm_medium=offline в URL", "utm_source содержит: banner, qr, radio, tv, flyer", "QR-коды с офлайн-материалов"]},
+      "other": {"условия": ["Не подошло под другие правила", "Неизвестный referrer", "Ошибки в UTM-разметке"]}
+    }
+  },
+  "business_process_rules": {
+    "BP_Определение_UTM_MEDIUM": {
+      "условие_1": "Если gclid не пустой → UTM_MEDIUM = cpc, UTM_SOURCE = google_ads",
+      "условие_2": "Если yclid не пустой → UTM_MEDIUM = cpc, UTM_SOURCE = yandex_ads",
+      "условие_3": "Если referrer содержит 'google.com' И utm_medium пустой → UTM_MEDIUM = organic, UTM_SOURCE = google_organic",
+      "условие_4": "Если referrer содержит 'napopravku.ru' → UTM_MEDIUM = referral, UTM_SOURCE = napopravku",
+      "условие_5": "Если способ обращения содержит 'Instagram' → UTM_MEDIUM = social, UTM_SOURCE = instagram_oleynik",
+      "условие_6": "Если способ обращения содержит 'WA' И UTM пусто → UTM_MEDIUM = '', UTM_SOURCE = ''",
+      "fallback": "Если ничего не определилось → UTM_MEDIUM = other"
+    },
+    "BP_Определение_SOURCE_ID": {
+      "условие_1": "Если UTM_MEDIUM = cpc → SOURCE_ID = ADVERTISING",
+      "условие_2": "Если UTM_MEDIUM = organic ИЛИ direct → SOURCE_ID = WEB",
+      "условие_3": "Если UTM_MEDIUM = referral И UTM_SOURCE содержит каталог → SOURCE_ID = PARTNER",
+      "условие_4": "Если UTM_MEDIUM = email → SOURCE_ID = EMAIL",
+      "условие_5": "Если способ обращения = звонок И UTM пусто → SOURCE_ID = CALL",
+      "условие_6": "Если способ обращения = мессенджер → SOURCE_ID = OTHER или пусто",
+      "fallback": "Остальное → SOURCE_ID = OTHER"
+    }
+  },
+  "priority_matrix": [
+    {"Приоритет": 1, "Условие": "gclid присутствует", "UTM_MEDIUM": "cpc", "UTM_SOURCE": "google_ads", "SOURCE_ID": "ADVERTISING"},
+    {"Приоритет": 2, "Условие": "yclid присутствует", "UTM_MEDIUM": "cpc", "UTM_SOURCE": "yandex_ads", "SOURCE_ID": "ADVERTISING"},
+    {"Приоритет": 3, "Условие": "utm_medium из URL", "UTM_MEDIUM": "из URL", "UTM_SOURCE": "из URL", "SOURCE_ID": "по UTM_MEDIUM"},
+    {"Приоритет": 4, "Условие": "referrer = поисковик", "UTM_MEDIUM": "organic", "UTM_SOURCE": "автоопределение", "SOURCE_ID": "WEB"},
+    {"Приоритет": 5, "Условие": "referrer = каталог", "UTM_MEDIUM": "referral", "UTM_SOURCE": "домен referrer", "SOURCE_ID": "PARTNER"},
+    {"Приоритет": 6, "Условие": "ChatApp канал", "UTM_MEDIUM": "social", "UTM_SOURCE": "по каналу", "SOURCE_ID": "OTHER"},
+    {"Приоритет": 7, "Условие": "Звонок без UTM", "UTM_MEDIUM": "", "UTM_SOURCE": "", "SOURCE_ID": "CALL"},
+    {"Приоритет": 8, "Условие": "Пустой referrer", "UTM_MEDIUM": "direct", "UTM_SOURCE": "direct_site", "SOURCE_ID": "WEB"},
+    {"Приоритет": 9, "Условие": "Не определилось", "UTM_MEDIUM": "other", "UTM_SOURCE": "unknown", "SOURCE_ID": "OTHER"}
+  ]
+}
