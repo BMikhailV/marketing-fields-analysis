@@ -1,0 +1,9 @@
+робот,условие,действие
+Определение UTM_MEDIUM,GCLID не пустое,"UTM_MEDIUM = cpc, UTM_SOURCE = google_ads, SOURCE_ID = ADVERTISING"
+Определение UTM_MEDIUM,YCLID не пустое,"UTM_MEDIUM = cpc, UTM_SOURCE = yandex_ads, SOURCE_ID = ADVERTISING"
+Определение UTM_MEDIUM,"REFERRER содержит 'google.com' И UTM_MEDIUM пустое","UTM_MEDIUM = organic, UTM_SOURCE = google_organic, SOURCE_ID = WEB"
+Определение UTM_MEDIUM,"UF_CONTACT_METHOD содержит 'Instagram'","UTM_MEDIUM = social, UTM_SOURCE = instagram_oleynik, SOURCE_ID = OTHER"
+Определение UTM_MEDIUM,"UF_CONTACT_METHOD содержит 'WA' И UTM_SOURCE пустое","Не заполнять UTM поля и SOURCE_ID (оставить пустыми)"
+Назначение ответственного,"UTM_CAMPAIGN содержит 'zakharov'","UF_RESPONSIBLE_CHANNEL = Захаров"
+Назначение ответственного,"UTM_SOURCE содержит 'instagram_oleynik'","UF_RESPONSIBLE_CHANNEL = Олейник"
+Назначение ответственного,"UTM_SOURCE содержит 'google_ads'","UF_RESPONSIBLE_CHANNEL = Блинов"
