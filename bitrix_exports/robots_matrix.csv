@@ -1,0 +1,8 @@
+Робот,Описание,Триггер,Если,То
+Определение UTM_MEDIUM,Определяет тип канала и заполняет UF_CRM_UTM_MEDIUM,Создание/изменение сделки,GCLID не пуст,"UTM_MEDIUM=cpc; UIS_UTM_SOURCE=google_ads; SOURCE_ID=ADVERTISING"
+Определение UTM_MEDIUM,Определяет тип канала и заполняет UF_CRM_UTM_MEDIUM,Создание/изменение сделки,YCLID не пуст,"UTM_MEDIUM=cpc; UIS_UTM_SOURCE=yandex_ads; SOURCE_ID=ADVERTISING"
+Определение UTM_MEDIUM,Определяет тип канала и заполняет UF_CRM_UTM_MEDIUM,Создание/изменение сделки,UIS_UTM_REFERRER содержит google.com,"UTM_MEDIUM=organic; UIS_UTM_SOURCE=google_organic; SOURCE_ID=WEB"
+Определение UTM_MEDIUM,Определяет тип канала и заполняет UF_CRM_UTM_MEDIUM,Создание/изменение сделки,UF_CRM_CONTACT_METHOD содержит Instagram,"UTM_MEDIUM=social; UIS_UTM_SOURCE=instagram_oleynik; SOURCE_ID=OTHER"
+Определение SOURCE_ID,Назначает категорию канала по UTM_MEDIUM,Изменение UF_CRM_UTM_MEDIUM,UTM_MEDIUM=cpc,SOURCE_ID=ADVERTISING
+Определение SOURCE_ID,Назначает категорию канала по UTM_MEDIUM,Изменение UF_CRM_UTM_MEDIUM,"UTM_MEDIUM=organic/direct",SOURCE_ID=WEB
+Назначение Ответственного,Назначает ответственного по кампании/источнику,Изменение UIS_UTM_COMPAIGN/UIS_UTM_SOURCE,UIS_UTM_COMPAIGN содержит zakharov,UF_RESPONSIBLE_CHANNEL=Захаров

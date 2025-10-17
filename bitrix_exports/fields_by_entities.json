@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "CRM_LEAD": {
+      "description": "Поля лидов. Включает блок UIS (трекинг) и Phone Location.",
+      "fields": [
+        {"id": "UF_CRM_FIRST_C", "name": "ID первой коммуникации", "type": "string", "usage": "Технический идентификатор первого события взаимодействия", "keep": true, "why": "Позволяет отстроить аналитику первой точки контакта"},
+        {"id": "UF_CRM_UIS4E9AE102DC", "name": "Источник ЮИС", "type": "string", "usage": "Сырые данные источника из UIS", "keep": true, "why": "Служит для кросс-проверки маркетинг-данных"},
+        {"id": "UF_CRM_UIS644D760FC0", "name": "UIS_SITE", "type": "string", "usage": "Сайт/площадка по данным UIS", "keep": true, "why": "Диагностика склейки визитов и звонков"},
+        {"id": "UF_CRM_UISFA26073F84", "name": "UIS_UTM_REFERRER", "type": "string", "usage": "Referrer последней сессии", "keep": true, "why": "Автоопределение органики/рефералов"},
+        {"id": "UF_CRM_UISDF1FD7E28C", "name": "UIS_URL_PAGE", "type": "string", "usage": "URL страницы визита", "keep": true, "why": "Детализация посадочной"},
+        {"id": "UF_CRM_UISED2CFABF38", "name": "UIS_URL_CHANEL", "type": "string", "usage": "Канал по UIS (сырой)", "keep": true, "why": "Отладка"},
+        {"id": "UF_CRM_UISC0EF573BDD", "name": "UIS_TIP_OBRASHENIA", "type": "string", "usage": "Тип обращения по UIS", "keep": true, "why": "Дублирует контакт-метод, но полезно для сравнения"},
+        {"id": "UF_CRM_UIS7C4CA66D21", "name": "UIS_DOMEN", "type": "string", "usage": "Домен визита", "keep": true, "why": "Сопоставление многосайтовости"},
+        {"id": "UF_CRM_UIS700C32AB5A", "name": "UIS_URL_DOMEN_REFERER", "type": "string", "usage": "Домен referrer", "keep": true, "why": "Определение referral"},
+        {"id": "UF_CRM_LAST_C", "name": "Последняя коммуникация", "type": "string", "usage": "Техническое поле последнего события", "keep": true, "why": "Сервисная аналитика"},
+        {"id": "UF_CRM_UIS_VISITOR_ID", "name": "ID Посетителя UIS", "type": "string", "multiple": true, "usage": "VisitorID трекинга", "keep": true, "why": "Склейка сессий/звонков"}
+      ],
+      "recommendations": [
+        "Не создавать дубликаты UTM в лидах — использовать UIS_* поля для первичной фиксации",
+        "UTM_MEDIUM как список создавать в сделках; в лидах оставить строковую фиксацию от UIS"
+      ]
+    },
+    "CRM_DEAL": {
+      "description": "Поля сделок. Здесь формируем итоговую маркетинговую атрибуцию и управленческие поля.",
+      "fields": [
+        {"id": "UF_CRM_UIS_UTM_SOURCE", "name": "UIS_UTM_SOURCE", "type": "string", "usage": "Источник трафика (откуда) — google_ads/instagram_oleynik/...", "keep": true, "why": "Базовый идентификатор источника для ROI"},
+        {"id": "UF_CRM_UIS_UTM_MEDIUM", "name": "UIS_UTM_MEDIUM", "type": "string", "usage": "Тип канала по UIS (строка)", "keep": true, "why": "Историческая совместимость/сырой срез"},
+        {"id": "UF_CRM_UIS_UTM_COMPAIGN", "name": "UIS_UTM_COMPAIGN", "type": "string", "usage": "ID кампании (опечатка в названии)", "keep": true, "why": "Фактические данные под роботов назначения"},
+        {"id": "UF_CRM_UIS_UTM_CONTENT", "name": "UIS_UTM_CONTENT", "type": "string", "usage": "UTM Content", "keep": true},
+        {"id": "UF_CRM_UIS_UTM_REFERRER", "name": "UIS_UTM_REFERRER", "type": "string", "usage": "Referrer", "keep": true},
+        {"id": "UF_CRM_CONTACT_METHOD", "name": "Способ обращения", "type": "list", "usage": "Как связался: Call 8800/WA 1182/TG/IG/Форма...", "keep": true, "why": "Ключевой факт конечного канала"},
+        {"id": "SOURCE_ID", "name": "Источник (стандартный)", "type": "std_list", "usage": "Категория канала: ADVERTISING/WEB/PARTNER/...", "keep": true, "why": "Сводная категория для стандартной отчетности"},
+        {"id": "UF_CRM_UTM_MEDIUM", "name": "UTM Medium (СПИСОК)", "type": "list", "values": ["cpc","organic","referral","social","email","direct","offline","other"], "usage": "Тип канала привлечения (как)", "keep": true, "create": true, "why": "Единообразие и разрез для роботов/отчетов"},
+        {"id": "UF_CRM_UTM_TERM", "name": "UTM Term", "type": "string", "usage": "Ключевые слова (поиск)", "keep": true, "create": true},
+        {"id": "UF_CLIENT_TYPE", "name": "Тип клиента", "type": "list", "values": ["Новый","Повторный","Реактивированный"], "usage": "Классификация клиента", "keep": true, "create": true},
+        {"id": "UF_RESPONSIBLE_CHANNEL", "name": "Ответственный за канал", "type": "list", "values": ["Синицын","Муратова","Разумова","Кованько","Захаров","Блинов","Трубин","Биназаров","Попрыгаев","Добродушкин","Олейник"], "usage": "Распределение ответственности по источникам/кампаниям", "keep": true, "create": true},
+        {"id": "UF_LANDING_DOMAIN", "name": "Домен посадочной", "type": "string", "usage": "Куда приземлился (footclinic.ru/doctoroleynik.com/...) ", "keep": true, "create": true},
+        {"id": "UF_CRM_DEAL_AMO_DRBMZODDERYSENGF", "name": "yclid", "type": "string", "usage": "Яндекс метка клика", "keep": true},
+        {"id": "UF_CRM_DEAL_AMO_MJPYDNTOVFOHWZBP", "name": "_ym_uid", "type": "string", "usage": "Яндекс User ID", "keep": true},
+        {"id": "UF_CRM_DEAL_AMO_GZLFWQZOHSAFMDUV", "name": "utm_referrer", "type": "string", "usage": "Резервный реферер", "keep": true}
+      ],
+      "list_field_values": {
+        "UF_CRM_UTM_MEDIUM": ["cpc","organic","referral","social","email","direct","offline","other"],
+        "UF_CLIENT_TYPE": ["Новый","Повторный","Реактивированный"],
+        "UF_RESPONSIBLE_CHANNEL": ["Синицын","Муратова","Разумова","Кованько","Захаров","Блинов","Трубин","Биназаров","Попрыгаев","Добродушкин","Олейник"],
+        "UF_CRM_CONTACT_METHOD": "18 значений уже в портале — проверить и дополнить: WA 1182/4510/5115/8888, Telegram Bot/Personal, IG аккаунты, VK Direct, Формы и т.д."
+      },
+      "recommendations": [
+        "Создать UF_CRM_UTM_MEDIUM как СПИСОК и использовать его в роботах",
+        "Оставить UIS_UTM_MEDIUM строковым (совместимость), но не использовать в отчетной логике",
+        "UF_CRM_CONTACT_METHOD — привести список к финальному набору каналов/номеров",
+        "UIS_UTM_COMPAIGN — учесть опечатку, при желании создать корректное UF_CRM_UTM_CAMPAIGN и мигрировать позднее"
+      ]
+    },
+    "CRM_CONTACT": {
+      "description": "У клиентов храним минимально необходимое: метки повторности, ответственного канала при необходимости.",
+      "fields": [
+        {"id": "UF_CLIENT_TYPE", "name": "Тип клиента", "type": "list", "values": ["Новый","Повторный","Реактивированный"], "usage": "Портрет клиента для retarget/реактивации", "keep": true, "create": true},
+        {"id": "UF_RESPONSIBLE_CHANNEL", "name": "Ответственный за канал", "type": "list", "values": ["Синицын","Муратова","Разумова","Кованько","Захаров","Блинов","Трубин","Биназаров","Попрыгаев","Добродушкин","Олейник"], "usage": "Статическая привязка по каналу (опционально)", "keep": true, "create": true}
+      ],
+      "recommendations": [
+        "Не дублировать UTM на уровне контактов",
+        "Держать только устойчивые признаки (тип клиента), при необходимости ответственного"
+      ]
+    }
+  },
+  "examples": [
+    {"case": "Google Ads → сайт → форма", "SOURCE_ID": "ADVERTISING", "UF_CRM_UTM_MEDIUM": "cpc", "UIS_UTM_SOURCE": "google_ads", "UF_CRM_CONTACT_METHOD": "Форма сайта"},
+    {"case": "Instagram органика → Direct", "SOURCE_ID": "OTHER", "UF_CRM_UTM_MEDIUM": "social", "UIS_UTM_SOURCE": "instagram_oleynik", "UF_CRM_CONTACT_METHOD": "Instagram @doctor.oleynik"},
+    {"case": "НаПоправку → сайт → звонок", "SOURCE_ID": "PARTNER", "UF_CRM_UTM_MEDIUM": "referral", "UIS_UTM_SOURCE": "napopravku", "UF_CRM_CONTACT_METHOD": "Call 8800"},
+    {"case": "WhatsApp без веб‑контекста", "SOURCE_ID": "", "UF_CRM_UTM_MEDIUM": "", "UIS_UTM_SOURCE": "", "UF_CRM_CONTACT_METHOD": "WA 1182"}
+  ],
+  "delete_or_keep": [
+    {"field": "UIS_URL_CHANEL", "action": "keep", "why": "Сервисное, для отладки; не использовать в отчетах"},
+    {"field": "UIS_TIP_OBRASHENIA", "action": "keep", "why": "Может дублировать Способ обращения — держим для контроля качества"},
+    {"field": "UIS_UTM_MEDIUM (string)", "action": "keep", "why": "Совместимость/история; основной медиум переносим в новый список UF_CRM_UTM_MEDIUM"}
+  ],
+  "why_each_field": {
+    "SOURCE_ID": "Стандартная категория канала для базовой отчётности в Б24 и интеграциях",
+    "UF_CRM_UTM_MEDIUM": "Единый нормативный тип канала (как привлекли): база для роботов и отчетов",
+    "UF_CRM_UIS_UTM_SOURCE": "Конкретный источник (откуда), нужен для ROI/распределения ответственности",
+    "UF_CRM_CONTACT_METHOD": "Как связались фактически (номер/канал). Ключевой факт конверсии",
+    "UF_RESPONSIBLE_CHANNEL": "Автоназначение ответственного по источнику/кампании",
+    "UF_CLIENT_TYPE": "Разрез по повторности: ретеншн, реактивации",
+    "UF_LANDING_DOMAIN": "Многосайтовость и разрез по доменам",
+    "UIS_UTM_REFERRER": "Определение organic/referral при пустых UTM",
+    "yclid/_ym_uid": "Трекинг и привязка к рекламным/анализным системам"
+  }
+}
